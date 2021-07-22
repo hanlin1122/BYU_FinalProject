@@ -3,7 +3,7 @@
 #imports all the necessary modules
 import time
 import random
-#make sure to install colorama
+#need to install colorama package for access to this module
 import colorama
 from colorama import Fore, Back, Style 
 
