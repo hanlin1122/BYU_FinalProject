@@ -3,8 +3,9 @@
 #imports all the necessary modules
 import time
 import random
+#make sure to install colorama
 import colorama
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style 
 
 #initializes the color for x and o
 colorama.init()
@@ -15,7 +16,7 @@ class Tic:
     #Gives the introduction to the player
     def __init__(self):
         print ('Welcome to Tic Tac Toe!')
-        print ('Player choose your symbol')
+        print ('Player one, choose your symbol')
 
     #Draws the sample board for the instructions
     def drawSampleBoard(self):
@@ -70,9 +71,9 @@ class Tic:
     def whoGoesFirst(self):
         # Randomly choose the player who goes first.
         if random.randint(0, 1) == 0:
-            return 'opponent'
+            return 'player2'
         else:
-            return 'player'
+            return 'player1'
 
     #Simple play again function at the end of the game
     def playAgain(self):
@@ -114,12 +115,12 @@ class Tic:
         else:
             return False
 
-    def getPlayerMove(self, board):
+    def getPlayer1Move(self, board):
         # Let the player type in his move.
         move = ' '
         while move not in '1 2 3 4 5 6 7 8 9'.split() or not self.isSpaceFree(board, int(move)):
             if move != ' ': print('I\'m sorry, that wasn\'t a registered spot, or the space is already taken!')
-            print('What is your next move? (1-9)')
+            print('Player one, what is your next move? (1-9)')
             move = input()
         return int(move)
 
@@ -136,12 +137,12 @@ class Tic:
         else:
             return None
 
-    def getPlayer1Move(self, board, player1Letter):
+    def getPlayer2Move(self, board, player2Letter):
         # Let the player type in his move.
         move = ' '
         while move not in '1 2 3 4 5 6 7 8 9'.split() or not self.isSpaceFree(board, int(move)):
             if move != ' ': print('I\'m sorry, that wasn\'t a registered spot, or the space is already taken!')
-            print('What is your opponent\'s next move? (1-9)')
+            print('Player two, what is your next move? (1-9)')
             move = input()
         return int(move)
 
@@ -160,23 +161,43 @@ while True:
     tic = Tic()
 
     theBoard = ['0', '1', '2', '3', '4', '5', '6' ,'7', '8', '9']
-    playerLetter, player1Letter = tic.inputPlayerLetter()
+    player1Letter, player2Letter = tic.inputPlayerLetter()
     turn = tic.whoGoesFirst()
-    if turn == 'player': print('You will go first.')
-    else: print('The ' + turn + ' will go first.')
+    if turn == 'player1': 
+        print('Player one will go first.')
+    else: 
+        print('Player two will go first.')
     tic.drawSampleBoard()
     gameIsPlaying = True
 
     while gameIsPlaying:
-        if turn == 'player':
-            # Player's turn.
+        if turn == 'player1':
+            # Player one's turn.
             tic.drawBoard(theBoard)
-            move = tic.getPlayerMove(theBoard)
-            tic.makeMove(theBoard, playerLetter, move)
+            move = tic.getPlayer1Move(theBoard)
+            tic.makeMove(theBoard, player1Letter, move)
 
-            if tic.isWinner(theBoard, playerLetter):
+            if tic.isWinner(theBoard, player1Letter):
                 tic.drawBoard(theBoard)
-                print('Hooray! You have won the game!')
+                print('Hooray! Player one won the game!')
+                gameIsPlaying = False
+            else:
+                if tic.isBoardFull(theBoard):
+                    tic.drawBoard(theBoard)
+                    print('The game is a tie!')
+                    break
+                else:
+                    turn = 'player2'
+
+        else:
+            # Player two's turn.
+            tic.drawBoard(theBoard)
+            move = tic.getPlayer2Move(theBoard, player2Letter)
+            tic.makeMove(theBoard, player2Letter, move)
+
+            if tic.isWinner(theBoard, player2Letter):
+                tic.drawBoard(theBoard)
+                print('Horray! Player two has won the game!')
                 gameIsPlaying = False
             else:
                 if tic.isBoardFull(theBoard):
@@ -185,24 +206,6 @@ while True:
                     break
                 else:
                     turn = 'player1'
-
-        else:
-            # Player1's turn.
-            tic.drawBoard(theBoard)
-            move = tic.getPlayer1Move(theBoard, player1Letter)
-            tic.makeMove(theBoard, player1Letter, move)
-
-            if tic.isWinner(theBoard, player1Letter):
-                tic.drawBoard(theBoard)
-                print('Your opponent has beaten you!')
-                gameIsPlaying = False
-            else:
-                if tic.isBoardFull(theBoard):
-                    tic.drawBoard(theBoard)
-                    print('The game is a tie!')
-                    break
-                else:
-                    turn = 'player'
 
     if not tic.playAgain():
         break
