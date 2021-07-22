@@ -1,5 +1,8 @@
 # Tic Tac Toe
 
+# fixed tie error and replacement error by changing the intial board values to empty spaces and changing the isSpaceFree function. 
+# Numbers won't appear on the board, so might have to call the drawSampleBoard function alongside the main board
+
 #imports all the necessary modules
 import time
 import random
@@ -109,8 +112,7 @@ class Tic:
 
     def isSpaceFree(self, board, move):
         # Return true if the passed move is free on the passed board.
-        if [board[move] == '1' or board[move] == '2' or board[move] == '3' or board[move] == '4' or board[move] == '5' or
-            board[move] == '6' or board[move] == '7' or board[move] == '8' or board[move] == '9']:
+        if [board[move] == ' ': 
             return True
         else:
             return False
@@ -160,7 +162,7 @@ while True:
 
     tic = Tic()
 
-    theBoard = ['0', '1', '2', '3', '4', '5', '6' ,'7', '8', '9']
+    theBoard = [' ', ' ', ' ', ' ', ' ', ' ', ' ' ,' ', ' ', ' ']
     player1Letter, player2Letter = tic.inputPlayerLetter()
     turn = tic.whoGoesFirst()
     if turn == 'player1': 
