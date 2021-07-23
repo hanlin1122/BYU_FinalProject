@@ -112,7 +112,7 @@ class Tic:
 
     def isSpaceFree(self, board, move):
         # Return true if the passed move is free on the passed board.
-        if [board[move] == ' ': 
+        if board[move] == ' ': 
             return True
         else:
             return False
@@ -187,7 +187,7 @@ while True:
                 if tic.isBoardFull(theBoard):
                     tic.drawBoard(theBoard)
                     print('The game is a tie!')
-                    break
+                    gameIsPlaying = False
                 else:
                     turn = 'player2'
 
@@ -205,7 +205,7 @@ while True:
                 if tic.isBoardFull(theBoard):
                     tic.drawBoard(theBoard)
                     print('The game is a tie!')
-                    break
+                    gameIsPlaying = False
                 else:
                     turn = 'player1'
 
