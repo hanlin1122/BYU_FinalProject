@@ -1,12 +1,10 @@
 # Tic Tac Toe
 
 # fixed tie error and replacement error by changing the intial board values to empty spaces and changing the isSpaceFree function. 
-# Numbers won't appear on the board, so might have to call the drawSampleBoard function alongside the main board
 
 #imports all the necessary modules
 import time
 import random
-#need to install colorama package for access to this module
 import colorama
 from colorama import Fore, Back, Style 
 
@@ -162,7 +160,7 @@ while True:
 
     tic = Tic()
 
-    theBoard = [' ', ' ', ' ', ' ', ' ', ' ', ' ' ,' ', ' ', ' ']
+    theBoard = [' '] * 10
     player1Letter, player2Letter = tic.inputPlayerLetter()
     turn = tic.whoGoesFirst()
     if turn == 'player1': 
@@ -187,7 +185,7 @@ while True:
                 if tic.isBoardFull(theBoard):
                     tic.drawBoard(theBoard)
                     print('The game is a tie!')
-                    gameIsPlaying = False
+                    break
                 else:
                     turn = 'player2'
 
@@ -205,7 +203,7 @@ while True:
                 if tic.isBoardFull(theBoard):
                     tic.drawBoard(theBoard)
                     print('The game is a tie!')
-                    gameIsPlaying = False
+                    break
                 else:
                     turn = 'player1'
 
