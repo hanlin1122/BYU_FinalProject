@@ -198,7 +198,7 @@ while True:
 
             if tic.isWinner(theBoard, player2Letter):
                 tic.drawBoard(theBoard)
-                print('Horray! Player two has won the game!')
+                print('Hooray! Player two has won the game!')
                 gameIsPlaying = False
             else:
                 if tic.isBoardFull(theBoard):
