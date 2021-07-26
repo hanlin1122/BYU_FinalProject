@@ -1,8 +1,6 @@
 # Tic Tac Toe
 # by Henry Zheng and Arnav Sastry
 
-# fixed tie error and replacement error by changing the intial board values to empty spaces and changing the isSpaceFree function. 
-
 #imports all the necessary modules
 import time
 import random
